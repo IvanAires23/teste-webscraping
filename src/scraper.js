@@ -3,7 +3,10 @@ import puppeteer from 'puppeteer';
 export async function scrapeWebsite(url) {
     try {
 
-        const browser = await puppeteer.launch({ headless: false });
+        const browser = await puppeteer.launch({
+            headless: true, // Assegura que o navegador não tenta abrir uma interface gráfica
+            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Estas opções são frequentemente necessárias em ambientes de servidor
+        });
         const page = await browser.newPage();
 
         const username = 'P2265468'
@@ -42,7 +45,7 @@ export async function scrapeWebsite(url) {
         console.log('Link do PDF:', pdfLink);
 
 
-        //await browser.close();
+        await browser.close();
         console.log('Login realizado com sucesso!');
     } catch (error) {
         console.error('Erro ao fazer scraping:', error);
