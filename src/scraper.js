@@ -67,6 +67,7 @@ export async function scrapeWebsite(url) {
 
         await browser.close();
         console.log('Login realizado com sucesso e navegador fechado.');
+        return pdfLink
     } catch (error) {
         console.error('Erro ao fazer scraping:', error);
         throw error;
