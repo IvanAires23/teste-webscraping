@@ -5,8 +5,10 @@ export async function scrapeWebsite(url) {
         console.log('Iniciando o processo de scraping...');
 
         const browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            executablePath:
+                process.env.NODE_ENV === "production"
+                    ? process.env.PUPPETEER_EXECUTABLE_PATH
+                    : puppeteer.executablePath(),
         });
         console.log('Navegador aberto com sucesso.');
 
